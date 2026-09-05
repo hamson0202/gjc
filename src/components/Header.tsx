@@ -21,7 +21,21 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-white/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
+        <Link
+          href="/"
+          className="flex items-center"
+          onClick={(e) => {
+            setOpen(false);
+            if (pathname === "/") {
+              e.preventDefault();
+              if (window.scrollY < 10) {
+                window.location.reload();
+              } else {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }
+          }}
+        >
           <Image
             src="/images/logo.png"
             alt="GJC 金進昌實業"
@@ -39,14 +53,16 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative py-1 text-sm font-medium transition-colors ${
+                className={`group relative py-1 text-sm font-medium transition-colors ${
                   active ? "text-primary-dark" : "text-foreground/60 hover:text-primary-dark"
                 }`}
               >
                 {item.label}
-                {active && (
-                  <span className="absolute -bottom-[13px] left-0 right-0 h-[2px] bg-accent" />
-                )}
+                <span
+                  className={`absolute -bottom-[13px] left-0 right-0 h-[2px] origin-left bg-accent transition-transform duration-300 ${
+                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
               </Link>
             );
           })}
@@ -76,8 +92,10 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`block rounded-md px-3 py-2.5 text-sm font-medium ${
-                  active ? "bg-primary-dark/5 text-primary-dark" : "text-foreground/70"
+                className={`block rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
+                  active
+                    ? "bg-primary-dark/5 text-primary-dark"
+                    : "text-foreground/70 hover:bg-primary-dark/5 hover:text-primary-dark"
                 }`}
               >
                 {item.label}

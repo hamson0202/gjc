@@ -3,11 +3,25 @@
 import { useState, type FormEvent } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  function validateEmail(value: string) {
+    if (value !== "" && !EMAIL_REGEX.test(value)) {
+      setEmailError("請輸入正確的電子郵件格式，例如 name@example.com");
+      return false;
+    }
+    setEmailError("");
+    return true;
+  }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!validateEmail(email)) return;
     setSubmitted(true);
   }
 
@@ -49,9 +63,19 @@ export default function ContactForm() {
         <label className="mb-1.5 block text-sm font-medium text-primary-dark/80">電子郵件</label>
         <input
           type="email"
-          className="w-full rounded-md border border-line bg-white px-4 py-2.5 text-sm text-primary-dark outline-none transition focus:border-primary"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (emailError) validateEmail(e.target.value);
+          }}
+          onBlur={(e) => validateEmail(e.target.value)}
+          aria-invalid={!!emailError}
+          className={`w-full rounded-md border bg-white px-4 py-2.5 text-sm text-primary-dark outline-none transition focus:border-primary ${
+            emailError ? "border-red-400 focus:border-red-500" : "border-line"
+          }`}
           placeholder="your@email.com"
         />
+        {emailError && <p className="mt-1.5 text-xs text-red-500">{emailError}</p>}
       </div>
       <div>
         <label className="mb-1.5 block text-sm font-medium text-primary-dark/80">需求說明</label>
