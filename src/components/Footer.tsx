@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import { products } from "@/data/products";
 
 export default function Footer() {
@@ -61,15 +61,11 @@ export default function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-white/50">
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="mt-0.5 shrink-0 text-accent" />
-                <span>臺中市龍井區藝術街72巷5號1樓</span>
+                <span>台中市西屯區西屯路三段185-2號</span>
               </li>
               <li className="flex items-start gap-2">
                 <Phone size={16} className="mt-0.5 shrink-0 text-accent" />
-                <span>電話待補</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Mail size={16} className="mt-0.5 shrink-0 text-accent" />
-                <span>信箱待補</span>
+                <span>04-26310022</span>
               </li>
             </ul>
           </div>

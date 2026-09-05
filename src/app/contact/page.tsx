@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Clock } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
@@ -8,9 +8,8 @@ export const metadata: Metadata = {
 };
 
 const contactInfo = [
-  { icon: MapPin, label: "公司地址", value: "臺中市龍井區藝術街72巷5號1樓" },
-  { icon: Phone, label: "聯絡電話", value: "電話待補" },
-  { icon: Mail, label: "電子信箱", value: "信箱待補" },
+  { icon: MapPin, label: "公司地址", value: "台中市西屯區西屯路三段185-2號" },
+  { icon: Phone, label: "聯絡電話", value: "04-26310022" },
   { icon: Clock, label: "營業時間", value: "週一至週五 08:00–17:00" },
 ];
 
@@ -48,7 +47,7 @@ export default function ContactPage() {
             <div className="mt-8 overflow-hidden rounded-lg border border-line">
               <iframe
                 title="公司位置地圖"
-                src="https://maps.google.com/maps?q=臺中市龍井區藝術街72巷5號&z=16&output=embed"
+                src="https://maps.google.com/maps?q=台中市西屯區西屯路三段185-2號&z=16&output=embed"
                 className="h-56 w-full"
                 loading="lazy"
               />
